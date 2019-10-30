@@ -17,12 +17,15 @@ def test_create_dataframe(data, column_names):
                 break
     if column_check:
         for x in column_names:
-            type_reference = type(data.loc[0, x])
+            try:
+                type_reference = type(data[x][0].item())
+            except AttributeError as err:
+                type_reference = type(data[x][0])
             for y in data[x]:
                 if type_reference != type(y):
                     type_check = False
                     break
     if column_check & type_check:
-        if len(data.index.tolist) >= 10:
+        if len(data.index.tolist()) >= 10:
             return True
     return False
