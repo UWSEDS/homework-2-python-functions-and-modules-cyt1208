@@ -3,26 +3,26 @@ def create_dataframe(url):
     data = pd.read_csv(url)
     return data
 
-def test_create_dataframe(data, colunm_names):
-    data_colunm = data.columns.tolist()
-    colunm_check = False
+
+def test_create_dataframe(data, column_names):
+    data_column = data.columns.tolist()
+    column_check = False
     type_check = True
-    row_check = False
-    if len(colunm_names) == len(data_colunm):
-        for x in data_colunm:
-            if x in colunm_names:
+    if len(column_names) == len(data_column):
+        for x in data_column:
+            if x in column_names:
                 column_check = True
             else:
                 column_check = False
-                break                                                                                
-    if colunm_check == True:
-        for x in colunm_names:
+                break
+    if column_check:
+        for x in column_names:
             type_reference = type(data.loc[0, x])
             for y in data[x]:
                 if type_reference != type(y):
                     type_check = False
                     break
-    if colunm_check & type_check:
+    if column_check & type_check:
         if len(data.index.tolist) >= 10:
             return True
     return False
